@@ -129,7 +129,7 @@ predict_test = predict(fitRF, testing_org)
 
 print(predict_test)
 ```
-The results were all correct.
+The results were submitted and they were all correct.
 
 ```{r}
 ######################
