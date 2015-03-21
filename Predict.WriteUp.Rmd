@@ -119,7 +119,9 @@ print(MatrixRF)
 This training model gives us a 100% Accuracy.
 
 #Prediction
-With a 100% accuracy from the in-sample testing, we proceed with predicting the actual test data.
+With a 100% accuracy from the in-sample testing, we would expect a close to zero out of sample error.
+
+We proceed with predicting the actual test data.
 ```{r}
 ########################
 ## predict the result ##
