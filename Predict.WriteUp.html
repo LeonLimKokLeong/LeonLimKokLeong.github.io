@@ -1027,23 +1027,18 @@ print(MatrixRF)</code></pre>
 ## Detection Rate         0.2845   0.1927   0.1741   0.1624   0.1835
 ## Detection Prevalence   0.2850   0.1927   0.1756   0.1629   0.1838
 ## Balanced Accuracy      0.9996   0.9980   0.9983   0.9950   0.9992</code></pre>
-<p>This training model gives us a close to 100% accuracy at 99.72%.</p>
+<p>The Confusion Matrix of this training model gives us a close to 100% accuracy at 99.72%.</p>
 </div>
 <div id="prediction" class="section level1">
 <h1>Prediction</h1>
-<p>We proceed with predicting the actual test data.</p>
+<p>We proceed with predicting the actual test data and submit the results.</p>
 <pre class="r"><code>########################
 ## predict the result ##
 ########################
 testing_org = read.csv(&quot;.\\pml-testing.csv&quot;)
 predict_test = predict(fitRF, testing_org)
 
-print(predict_test)</code></pre>
-<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
-##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
-## Levels: A B C D E</code></pre>
-<p>The results were submitted and they were all correct.</p>
-<pre class="r"><code>######################
+######################
 ## write the result ##
 ######################
 pml_write_files = function(x){
@@ -1054,7 +1049,13 @@ pml_write_files = function(x){
   }
 }
 
-pml_write_files(predict_test)</code></pre>
+pml_write_files(predict_test)
+
+print(predict_test)</code></pre>
+<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
+##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
+## Levels: A B C D E</code></pre>
+<p>The results were submitted and they were all correct.</p>
 </div>
 <div id="further-testing" class="section level1">
 <h1>Further testing</h1>
@@ -1110,7 +1111,7 @@ print(MatrixRF)</code></pre>
 ## Detection Rate         0.2845   0.1927   0.1741   0.1624   0.1835
 ## Detection Prevalence   0.2850   0.1927   0.1756   0.1629   0.1838
 ## Balanced Accuracy      0.9996   0.9980   0.9983   0.9950   0.9992</code></pre>
-<p>This training model with reduced features also gives us an accuracy at 99.72%. We run the new model with the actual test data.</p>
+<p>The Confusion Matrix of this reduced features training model also gives us an accuracy at 99.72%. We run the new model with the actual test data.</p>
 <pre class="r"><code>print(predict(fitRFVIP, testing_org))</code></pre>
 <pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
 ##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 

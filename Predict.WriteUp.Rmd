@@ -116,10 +116,10 @@ MatrixRF = confusionMatrix(predictRF, testing$classe)
 
 print(MatrixRF)
 ```
-This training model gives us a close to 100% accuracy at 99.72%.
+The Confusion Matrix of this training model gives us a close to 100% accuracy at 99.72%.
 
 #Prediction
-We proceed with predicting the actual test data.
+We proceed with predicting the actual test data and submit the results.
 ```{r}
 ########################
 ## predict the result ##
@@ -127,11 +127,6 @@ We proceed with predicting the actual test data.
 testing_org = read.csv(".\\pml-testing.csv")
 predict_test = predict(fitRF, testing_org)
 
-print(predict_test)
-```
-The results were submitted and they were all correct.
-
-```{r}
 ######################
 ## write the result ##
 ######################
@@ -144,7 +139,10 @@ pml_write_files = function(x){
 }
 
 pml_write_files(predict_test)
+
+print(predict_test)
 ```
+The results were submitted and they were all correct.
 
 #Further testing
 For the purpose of further testing, we do a varImpPlot of the randomForest model.
@@ -175,7 +173,7 @@ MatrixRFVIP = confusionMatrix(predictRFVIP, testing$classe)
 print(MatrixRF)
 ```
 
-This training model with reduced features also gives us an accuracy at 99.72%. We run the new model with the actual test data.
+The Confusion Matrix of this reduced features training model also gives us an accuracy at 99.72%. We run the new model with the actual test data.
 
 ```{r}
 print(predict(fitRFVIP, testing_org))
