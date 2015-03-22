@@ -972,9 +972,9 @@ summary(training)</code></pre>
 ## create a training(80%) testing(20%) partition
 set.seed(2);
 inTrain = createDataPartition(y=training$classe,p=0.8,list=F)
-training = training[inTrain,]
-testing = training[-inTrain,]</code></pre>
-<p>We have 15699 rows in the training set, and 3137 rows in the in-sample testing set.</p>
+testing = training[-inTrain,]
+training = training[inTrain,]</code></pre>
+<p>We have 15699 rows in the training set, and 3923 rows in the in-sample testing set.</p>
 </div>
 <div id="fitting-the-model" class="section level1">
 <h1>Fitting the Model</h1>
@@ -999,39 +999,38 @@ print(MatrixRF)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   A   B   C   D   E
-##          A 878   0   0   0   0
-##          B   0 620   0   0   0
-##          C   0   0 544   0   0
-##          D   0   0   0 518   0
-##          E   0   0   0   0 577
+## Prediction    A    B    C    D    E
+##          A 1116    2    0    0    0
+##          B    0  756    0    0    0
+##          C    0    1  683    5    0
+##          D    0    0    1  637    1
+##          E    0    0    0    1  720
 ## 
 ## Overall Statistics
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9988, 1)
-##     No Information Rate : 0.2799     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##  Mcnemar's Test P-Value : NA         
+##                                          
+##                Accuracy : 0.9972         
+##                  95% CI : (0.995, 0.9986)
+##     No Information Rate : 0.2845         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.9965         
+##  Mcnemar's Test P-Value : NA             
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            1.0000   1.0000   1.0000   1.0000   1.0000
-## Specificity            1.0000   1.0000   1.0000   1.0000   1.0000
-## Pos Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
-## Neg Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
-## Prevalence             0.2799   0.1976   0.1734   0.1651   0.1839
-## Detection Rate         0.2799   0.1976   0.1734   0.1651   0.1839
-## Detection Prevalence   0.2799   0.1976   0.1734   0.1651   0.1839
-## Balanced Accuracy      1.0000   1.0000   1.0000   1.0000   1.0000</code></pre>
-<p>This training model gives us a 100% Accuracy.</p>
+## Sensitivity            1.0000   0.9960   0.9985   0.9907   0.9986
+## Specificity            0.9993   1.0000   0.9981   0.9994   0.9997
+## Pos Pred Value         0.9982   1.0000   0.9913   0.9969   0.9986
+## Neg Pred Value         1.0000   0.9991   0.9997   0.9982   0.9997
+## Prevalence             0.2845   0.1935   0.1744   0.1639   0.1838
+## Detection Rate         0.2845   0.1927   0.1741   0.1624   0.1835
+## Detection Prevalence   0.2850   0.1927   0.1756   0.1629   0.1838
+## Balanced Accuracy      0.9996   0.9980   0.9983   0.9950   0.9992</code></pre>
+<p>This training model gives us a close to 100% accuracy at 99.72%.</p>
 </div>
 <div id="prediction" class="section level1">
 <h1>Prediction</h1>
-<p>With a 100% accuracy from the in-sample testing, we would expect a close to zero out of sample error.</p>
 <p>We proceed with predicting the actual test data.</p>
 <pre class="r"><code>########################
 ## predict the result ##
@@ -1083,43 +1082,44 @@ print(MatrixRF)</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
-## Prediction   A   B   C   D   E
-##          A 878   0   0   0   0
-##          B   0 620   0   0   0
-##          C   0   0 544   0   0
-##          D   0   0   0 518   0
-##          E   0   0   0   0 577
+## Prediction    A    B    C    D    E
+##          A 1116    2    0    0    0
+##          B    0  756    0    0    0
+##          C    0    1  683    5    0
+##          D    0    0    1  637    1
+##          E    0    0    0    1  720
 ## 
 ## Overall Statistics
-##                                      
-##                Accuracy : 1          
-##                  95% CI : (0.9988, 1)
-##     No Information Rate : 0.2799     
-##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
-##                                      
-##                   Kappa : 1          
-##  Mcnemar's Test P-Value : NA         
+##                                          
+##                Accuracy : 0.9972         
+##                  95% CI : (0.995, 0.9986)
+##     No Information Rate : 0.2845         
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+##                                          
+##                   Kappa : 0.9965         
+##  Mcnemar's Test P-Value : NA             
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            1.0000   1.0000   1.0000   1.0000   1.0000
-## Specificity            1.0000   1.0000   1.0000   1.0000   1.0000
-## Pos Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
-## Neg Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
-## Prevalence             0.2799   0.1976   0.1734   0.1651   0.1839
-## Detection Rate         0.2799   0.1976   0.1734   0.1651   0.1839
-## Detection Prevalence   0.2799   0.1976   0.1734   0.1651   0.1839
-## Balanced Accuracy      1.0000   1.0000   1.0000   1.0000   1.0000</code></pre>
-<pre class="r"><code>print(predict_test)</code></pre>
-<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
-##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
-## Levels: A B C D E</code></pre>
+## Sensitivity            1.0000   0.9960   0.9985   0.9907   0.9986
+## Specificity            0.9993   1.0000   0.9981   0.9994   0.9997
+## Pos Pred Value         0.9982   1.0000   0.9913   0.9969   0.9986
+## Neg Pred Value         1.0000   0.9991   0.9997   0.9982   0.9997
+## Prevalence             0.2845   0.1935   0.1744   0.1639   0.1838
+## Detection Rate         0.2845   0.1927   0.1741   0.1624   0.1835
+## Detection Prevalence   0.2850   0.1927   0.1756   0.1629   0.1838
+## Balanced Accuracy      0.9996   0.9980   0.9983   0.9950   0.9992</code></pre>
+<p>This training model with reduced features also gives us an accuracy at 99.72%. We run the new model with the actual test data.</p>
 <pre class="r"><code>print(predict(fitRFVIP, testing_org))</code></pre>
 <pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
 ##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
 ## Levels: A B C D E</code></pre>
-<p>They are matching.</p>
+<pre class="r"><code>print(predict_test)</code></pre>
+<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
+##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
+## Levels: A B C D E</code></pre>
+<p>The prediction with the reduced feature model (first row) matches with the submitted prediction (second row).</p>
 </div>
 
 

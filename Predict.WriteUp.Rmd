@@ -90,8 +90,8 @@ We now use a 80/20 ratio to split the data into training and testing data.
 ## create a training(80%) testing(20%) partition
 set.seed(2);
 inTrain = createDataPartition(y=training$classe,p=0.8,list=F)
-training = training[inTrain,]
 testing = training[-inTrain,]
+training = training[inTrain,]
 ```
 We have `r nrow(training)` rows in the training set, and `r nrow(testing)` rows in the in-sample testing set.
 
@@ -116,11 +116,9 @@ MatrixRF = confusionMatrix(predictRF, testing$classe)
 
 print(MatrixRF)
 ```
-This training model gives us a 100% Accuracy.
+This training model gives us a close to 100% accuracy at 99.72%.
 
 #Prediction
-With a 100% accuracy from the in-sample testing, we would expect a close to zero out of sample error.
-
 We proceed with predicting the actual test data.
 ```{r}
 ########################
@@ -175,9 +173,13 @@ predictRFVIP  = predict(fitRFVIP, testing)
 MatrixRFVIP = confusionMatrix(predictRFVIP, testing$classe)
 
 print(MatrixRF)
-
-print(predict_test)
-print(predict(fitRFVIP, testing_org))
 ```
 
-They are matching.
+This training model with reduced features also gives us an accuracy at 99.72%. We run the new model with the actual test data.
+
+```{r}
+print(predict(fitRFVIP, testing_org))
+print(predict_test)
+```
+
+The prediction with the reduced feature model (first row) matches with the submitted prediction (second row).
